@@ -1,9 +1,17 @@
 import { useStore } from './store';
 import './App.scss';
 import { InfoBox } from './components/InfoBox';
+import { useRef, useEffect } from 'react';
 
 function App() {
 	const store = useStore((state) => state);
+	const techBookSearchRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		if (techBookSearchRef.current !== null) {
+			techBookSearchRef.current.focus();
+		}
+	}, [store.techBooks]);
 
 	return (
 		<div className="App">
@@ -72,6 +80,34 @@ function App() {
 							</button>
 						</div>
 					</div>
+
+					{store.techBooks.length === 0 && (
+						<div className="data">
+							<label>Load data</label>
+							<div>
+								<button
+									disabled={store.techBooksAreLoading}
+									onClick={() => store.loadTechBooks()}
+								>
+									load tech books
+								</button>
+							</div>
+						</div>
+					)}
+
+					{store.techBooks.length > 0 && (
+						<div className="data">
+							<label>Search tech books:</label>
+							<input
+								type="text"
+								ref={techBookSearchRef}
+								value={store.techBookSearch}
+								onChange={(e) =>
+									store.setTechBookSearch(e.target.value)
+								}
+							/>
+						</div>
+					)}
 				</section>
 				<section className="dataArea">
 					<InfoBox />
