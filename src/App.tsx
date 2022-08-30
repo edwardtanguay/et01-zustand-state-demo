@@ -19,6 +19,27 @@ function App() {
 							onChange={(e) => store.setMessage(e.target.value)}
 						/>
 					</div>
+
+					<div className="data">
+						<label>Colors:</label>
+						<div>
+							<button onClick={() => store.addColor('blue')}>
+								blue
+							</button>
+							<button onClick={() => store.addColor('red')}>
+								red
+							</button>
+							<button onClick={() => store.addColor('yellow')}>
+								yellow
+							</button>
+						</div>
+						<button onClick={() => store.deleteColor()}>
+							delete color
+						</button>
+						<button onClick={() => store.setColors([])}>
+							delete all colors
+						</button>
+					</div>
 				</section>
 				<section className="dataArea">
 					<InfoBox />

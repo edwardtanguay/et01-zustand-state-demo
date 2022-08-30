@@ -9,6 +9,12 @@ export const InfoBox = () => {
 				<label>Message:</label>{' '}
 				<span className="theValue">{store.message}</span>
 			</div>
+			<div className="row">
+				<label>Colors:</label>{' '}
+				<span className="theValue">
+					{store.colors.map((m) => m).join(', ')}
+				</span>
+			</div>
 		</div>
 	);
 };
